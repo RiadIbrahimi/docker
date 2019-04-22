@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    hostname: web
+    domainname: web.test
+    build: .
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - .:/var/www
+    - .:/var/log/httpd
+    tty: true
+    links:
+    - "mysql:DB_SERVER"
+  mysql:
+    hostname: mysql
+    domainname: mysql.test
+    image: mariadb
+    ports:
+    - "3306:3306"
